@@ -15,6 +15,32 @@ export default {
     
     methods: {
         // Add code here
+        changeTheme() {
+            // cycle to next theme
+            this.currentThemeIndex = (this.currentThemeIndex + 1) % this.themes.length
+        },
+
+        
+        getThemeStyles() {
+            const currentTheme = this.themes[this.currentThemeIndex]
+
+            if (currentTheme === 'dark') {
+                return {
+                backgroundColor: '#333',
+                color: '#fff'
+                }
+            } else if (currentTheme === 'light') {
+                return {
+                backgroundColor: '#fff',
+                color: '#000'
+                }
+            } else if (currentTheme === 'neon') {
+                return {
+                backgroundColor: '#39ff14',
+                color: '#000'
+                }
+            }
+        }
 
     }
 }
@@ -48,7 +74,7 @@ export default {
         <!-- Preview Section -->
         <div class="preview-section">
             <h2>Live Preview</h2>
-            <div class="preview-card"> <!-- Add code here to set background color and text color -->
+            <div class="preview-card" :style="getThemeStyles()"> <!-- Add code here to set background color and text color -->
                 <img :src="imageUrl" class="preview-img">
                 <h3>{{ name || 'Your Name' }}</h3>
                 <h4>{{ job || 'Job Title' }}</h4>
@@ -94,4 +120,6 @@ export default {
         border-radius: 4px;
         cursor: pointer;
     }
+
+
 </style>
